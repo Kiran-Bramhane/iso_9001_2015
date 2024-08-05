@@ -1,0 +1,46 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-07-30 10:05:19.597740",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "criteria",
+  "rating",
+  "comment"
+ ],
+ "fields": [
+  {
+   "fieldname": "criteria",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Criteria",
+   "options": "Criteria"
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Rating"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Comment"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-07-30 10:11:21.522355",
+ "modified_by": "Administrator",
+ "module": "Iso 9001 2015",
+ "name": "Criteria Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

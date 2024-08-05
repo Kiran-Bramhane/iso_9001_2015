@@ -1,0 +1,183 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{VM}-{####}",
+ "creation": "2024-07-30 10:24:06.485047",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_yyub",
+  "amended_from",
+  "general_templates",
+  "supplier_name",
+  "address_name",
+  "address",
+  "column_break_haos",
+  "prepared_by",
+  "department",
+  "from_date",
+  "to_date",
+  "vendor_type",
+  "section_break_dsvx",
+  "feedback",
+  "total_percentage",
+  "section_break_kqlk",
+  "remark",
+  "instructions"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_yyub",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Vendor Monitoring",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "general_templates",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "General Templates",
+   "options": "General  Template",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier Name",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "supplier_name.supplier_primary_address",
+   "fieldname": "address_name",
+   "fieldtype": "Link",
+   "label": "Address Name",
+   "options": "Supplier"
+  },
+  {
+   "fetch_from": "address_name.primary_address",
+   "fieldname": "address",
+   "fieldtype": "Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "column_break_haos",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "prepared_by",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Prepared By",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Department",
+   "reqd": 1
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "vendor_type",
+   "fieldtype": "Select",
+   "label": "Vendor Type",
+   "options": "\nCompany\nIndividual\nProprietorship\nPartnership",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_dsvx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "feedback",
+   "fieldtype": "Table",
+   "label": "Feedback",
+   "options": "Criteria Detail",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_kqlk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Long Text",
+   "label": "Remark",
+   "reqd": 1
+  },
+  {
+   "fieldname": "instructions",
+   "fieldtype": "HTML",
+   "label": "Instructions",
+   "options": "<b>Instructions</b><br>\n1. Evaluate Vendor on items listed and check the appropriate columns. Some items may not apply.<br>\n2. Indicate Vendor's overall rating by checking the appropriate column.<br>\n3. If Vendor's overall rating is fair or poor, please explain under \"Comments.\" <br>\n4. Return to the Office of Purchasing.\n"
+  },
+  {
+   "fieldname": "total_percentage",
+   "fieldtype": "Percent",
+   "label": "Total Percentage"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-08-05 12:42:22.999764",
+ "modified_by": "Administrator",
+ "module": "Iso 9001 2015",
+ "name": "Vendor Monitoring",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

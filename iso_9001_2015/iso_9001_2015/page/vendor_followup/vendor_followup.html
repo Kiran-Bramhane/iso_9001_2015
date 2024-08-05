@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .vendor_followup {
+            width: 100%;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .vendor_followup table {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        .table-container {
+            overflow-y: auto;
+            position: relative;
+        }
+
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background: #f1f1f1;
+            z-index: 1;
+            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: none; /* Remove borders from table cells */
+        }
+    </style>
+</head>
+<body>
+    <div class="vendor_followup">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr</th> 
+                        <th width="8%">Date</th>
+                        <th>PO No</th>
+                        <th>Supplier</th>
+                        <th>Item Code</th>
+                        <th>Item Name</th>
+                        <th>PO Qty</th>
+                        <th>Accepted Qty</th>
+                        <th>Received Qty</th>
+                        <th>Rework Qty</th>
+                        <th>Reject Qty</th>
+                        <th>Pending Qty</th>
+                        <th>Lead Time Days</th>
+                        <th>Number Of Days From PO</th>
+                        <th>Follow Up</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for purchase_order in purchase_orders %}
+                    <tr>
+                        <td data-label="Sr">{{ purchase_order.index }}</td> 
+                        <td data-label="Date">{{ purchase_order.formatted_transaction_date }}</td>
+                        <td data-label="PO No">{{ purchase_order.name }}</td>
+                        <td data-label="Supplier">{{ purchase_order.supplier }}</td>
+                        <td data-label="Item Code">{{ purchase_order.item_code }}</td>
+                        <td data-label="Item Name">{{ purchase_order.item_name }}</td>
+                        <td data-label="PO Qty">{{ purchase_order.qty }}</td>
+                        <td data-label="Ok Qty">{{ purchase_order.total_accepted_qty }}</td>
+                        <td data-label="Ok Qty">{{ purchase_order.total_received_qty }}</td>
+                        <td data-label="Rework Qty">{{ purchase_order.total_rework }}</td>
+                        <td data-label="Reject Qty">{{ purchase_order.total_reject }}</td>
+                        <td data-label="Pending Qty">{{ purchase_order.pending_qty }}</td>
+                        <td data-label="Lead Time Days">{{ purchase_order.lead_time_days }}</td>
+                        <td data-label="Number Of Days From PO">{{ purchase_order.number_of_days_from_po }}</td>
+                        <td data-label="Follow Up">
+                        <button class="btn btn-primary msgprint-btn" data-supplier="{{ purchase_order.supplier }}" data-email="{{ purchase_order.contact_email }}">Follow Up</button> 
+                    </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html> 
+
+
