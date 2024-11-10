@@ -1,43 +1,93 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        /* Ensure elements calculate width properly with padding */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* Full width for vendor follow-up container */
         .vendor_followup {
             width: 100%;
-            overflow-x: auto;
+            padding: 10px;
             position: relative;
         }
 
-        .vendor_followup table {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            width: 100%;
-            border-collapse: collapse;
-        }
-
+        /* Button styling */
         .btn {
             padding: 5px 10px;
             font-size: 12px;
+            background-color: #000203;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
         }
 
+        /* Full-width container for the table */
         .table-container {
-            overflow-y: auto;
-            position: relative;
+            max-height: 80vh;
+            overflow-y: auto; /* Enable vertical scrolling */
+            width: 100%;
         }
 
+        /* Full width for table */
+        .vendor_followup table {
+            width: 100%;
+            table-layout: auto;
+            margin: auto;
+        }
 
+        /* Sticky headers for the table */
         thead th {
             position: sticky;
             top: 0;
             background: #f1f1f1;
-            z-index: 1;
-            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+            padding: 8px;
+            text-align: left;
         }
 
+        /* Table cell styling */
         th, td {
             padding: 8px;
             text-align: left;
-            border: none; /* Remove borders from table cells */
+            word-wrap: break-word; /* Ensure long words break within their cells */
+            overflow-wrap: break-word;
+        }
+
+        /* Adjust font size and padding for smaller screens */
+        @media (max-width: 768px) {
+            .btn {
+                font-size: 10px;
+            }
+
+            th, td {
+                font-size: 10px;
+                padding: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vendor_followup {
+                padding: 5px;
+            }
+
+            th, td {
+                font-size: 8px;
+            }
+
+            .btn {
+                font-size: 8px;
+                padding: 3px 5px;
+            }
         }
     </style>
 </head>
@@ -48,19 +98,23 @@
                 <thead>
                     <tr>
                         <th>Sr</th> 
-                        <th width="8%">Date</th>
+                        <th>Date</th>
                         <th>PO No</th>
                         <th>Supplier</th>
                         <th>Item Code</th>
+                        <th>UOM</th>
                         <th>Item Name</th>
+                        <th>FG Item</th> 
                         <th>PO Qty</th>
-                        <th>Accepted Qty</th>
                         <th>Received Qty</th>
+                        <th>Accepted Qty</th>
                         <th>Rework Qty</th>
                         <th>Reject Qty</th>
                         <th>Pending Qty</th>
+                        <th>RM Received Qty</th> 
+                        <th>RM Balance Qty</th>
                         <th>Lead Time Days</th>
-                        <th>Number Of Days From PO</th>
+                        <th>Days From PO</th>
                         <th>Follow Up</th> 
                     </tr>
                 </thead>
@@ -72,18 +126,196 @@
                         <td data-label="PO No">{{ purchase_order.name }}</td>
                         <td data-label="Supplier">{{ purchase_order.supplier }}</td>
                         <td data-label="Item Code">{{ purchase_order.item_code }}</td>
+                        <td data-label="UOM">{{ purchase_order.uom }}</td>
                         <td data-label="Item Name">{{ purchase_order.item_name }}</td>
+                        <td data-label="FG Item">{{ purchase_order.fg_item }}</td>
                         <td data-label="PO Qty">{{ purchase_order.qty }}</td>
-                        <td data-label="Ok Qty">{{ purchase_order.total_accepted_qty }}</td>
-                        <td data-label="Ok Qty">{{ purchase_order.total_received_qty }}</td>
+                        <td data-label="Received Qty">{{ purchase_order.total_received_qty }}</td>
+                        <td data-label="Accepted Qty">{{ purchase_order.total_accepted_qty }}</td>
                         <td data-label="Rework Qty">{{ purchase_order.total_rework }}</td>
                         <td data-label="Reject Qty">{{ purchase_order.total_reject }}</td>
                         <td data-label="Pending Qty">{{ purchase_order.pending_qty }}</td>
+                        <td data-label="RM Received Qty">{{ purchase_order.rm_received_qty }}</td>
+                        <td data-label="RM Balance Qty">{{ purchase_order.rm_balance_qty }}</td>
                         <td data-label="Lead Time Days">{{ purchase_order.lead_time_days }}</td>
-                        <td data-label="Number Of Days From PO">{{ purchase_order.number_of_days_from_po }}</td>
+                        <td data-label="Days From PO">{{ purchase_order.number_of_days_from_po }}</td>
                         <td data-label="Follow Up">
-                        <button class="btn btn-primary msgprint-btn" data-supplier="{{ purchase_order.supplier }}" data-email="{{ purchase_order.contact_email }}">Follow Up</button> 
-                    </td>
+                            <button class="btn msgprint-btn" data-supplier="{{ purchase_order.supplier }}" data-email="{{ purchase_order.contact_email }}">Follow Up</button> 
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>    
+
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        /* Ensure elements calculate width properly with padding */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* Full width for vendor follow-up container */
+        .vendor_followup {
+            width: 100%;
+            padding: 10px;
+            position: relative;
+        }
+
+        /* Button styling */
+        .btn {
+            padding: 5px 10px;
+            font-size: 12px;
+            background-color: #000203;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* Full-width container for the table */
+        .table-container {
+            max-height: 80vh;
+            overflow-y: auto; /* Enable vertical scrolling */
+            width: 100%;
+        }
+
+        /* Full width for table */
+        .vendor_followup table {
+            width: 100%;
+            table-layout: fixed; /* Use fixed table layout */
+            margin: auto;
+        }
+
+        /* Sticky headers for the table */
+        thead th {
+            position: sticky;
+            top: 0;
+            background: #f1f1f1;
+            padding: 8px;
+            text-align: left;
+        }
+
+        /* Table cell styling */
+        th, td {
+            padding: 8px;
+            text-align: left;
+            word-wrap: break-word; /* Ensure long words break within their cells */
+            overflow-wrap: break-word;
+        }
+
+        /* Specific width adjustments */
+        th:nth-child(5), td:nth-child(5), /* Item Code */
+        th:nth-child(7), td:nth-child(7), /* Item Name */
+        th:nth-child(8), td:nth-child(8) { /* FG Item */
+            min-width: 100px; /* Set a minimum width */
+            max-width: 150px; /* Set a maximum width to control overflow */
+        }
+
+        /* Adjust font size and padding for smaller screens */
+        @media (max-width: 768px) {
+            .btn {
+                font-size: 10px;
+            }
+
+            th, td {
+                font-size: 10px;
+                padding: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vendor_followup {
+                padding: 5px;
+            }
+
+            th, td {
+                font-size: 8px;
+            }
+
+            .btn {
+                font-size: 8px;
+                padding: 3px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="vendor_followup">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr</th> 
+                        <th>Date</th>
+                        <th>PO No</th>
+                        <th>Supplier</th>
+                        <th>Item Code</th>
+                        <th>UOM</th>
+                        <th>Item Name</th>
+                        <th>FG Item</th> 
+                        <th>PO Qty</th>
+                        <th>Received Qty</th>
+                        <th>Accepted Qty</th>
+                        <th>Rework Qty</th>
+                        <th>Reject Qty</th>
+                        <th>Pending Qty</th>
+                        <th>RM Received Qty</th> 
+                        <th>RM Balance Qty</th>
+                        <th>Lead Time Days</th>
+                        <th>Days From PO</th>
+                        <th>Follow Up</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for purchase_order in purchase_orders %}
+                    <tr>
+                        <td data-label="Sr">{{ purchase_order.index }}</td> 
+                        <td data-label="Date">{{ purchase_order.formatted_transaction_date }}</td>
+                        <td data-label="PO No">{{ purchase_order.name }}</td>
+                        <td data-label="Supplier">{{ purchase_order.supplier }}</td>
+                        <td data-label="Item Code">{{ purchase_order.item_code }}</td>
+                        <td data-label="UOM">{{ purchase_order.uom }}</td>
+                        <td data-label="Item Name">{{ purchase_order.item_name }}</td>
+                        <td data-label="FG Item">{{ purchase_order.fg_item }}</td>
+                        <td data-label="PO Qty">{{ purchase_order.qty }}</td>
+                        <td data-label="Received Qty">{{ purchase_order.total_received_qty }}</td>
+                        <td data-label="Accepted Qty">{{ purchase_order.total_accepted_qty }}</td>
+                        <td data-label="Rework Qty">{{ purchase_order.total_rework }}</td>
+                        <td data-label="Reject Qty">{{ purchase_order.total_reject }}</td>
+                        <td data-label="Pending Qty">{{ purchase_order.pending_qty }}</td>
+                        <td data-label="RM Received Qty">{{ purchase_order.rm_received_qty }}</td>
+                        <td data-label="RM Balance Qty">{{ purchase_order.rm_balance_qty }}</td>
+                        <td data-label="Lead Time Days">{{ purchase_order.lead_time_days }}</td>
+                        <td data-label="Days From PO">{{ purchase_order.number_of_days_from_po }}</td>
+                        <td data-label="Follow Up">
+                            <button class="btn msgprint-btn" data-supplier="{{ purchase_order.supplier }}" data-email="{{ purchase_order.contact_email }}">Follow Up</button> 
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -91,6 +323,4 @@
         </div>
     </div>
 </body>
-</html> 
-
-
+</html>

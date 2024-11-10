@@ -145,3 +145,10 @@ frappe.pages["vendor-followup"].on_page_load = function(wrapper) {
     }
     load_data();
 };
+
+
+
+
+
+
+

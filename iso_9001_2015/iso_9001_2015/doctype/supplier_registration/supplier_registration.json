@@ -11,12 +11,14 @@
   "company",
   "office_address",
   "turnover_of_company",
-  "company_incorporation_year_and_reg_no",
+  "state",
+  "sate_gst_no",
   "column_break_fgwg",
   "supplier_type",
   "factory_address",
   "pan_no",
   "gst_no",
+  "company_incorporation_year_and_reg_no",
   "contactcompany_details_section",
   "name1",
   "designation",
@@ -28,6 +30,7 @@
   "account_number",
   "payment_terms",
   "msme_no",
+  "scale",
   "column_break_hqds",
   "bank_name",
   "branch_address",
@@ -226,7 +229,8 @@
   {
    "fieldname": "manager_sign",
    "fieldtype": "Signature",
-   "label": "Manager Sign"
+   "label": "Manager Sign",
+   "reqd": 1
   },
   {
    "fieldname": "date_of_registration",
@@ -240,7 +244,8 @@
   {
    "fieldname": "requester_sign",
    "fieldtype": "Signature",
-   "label": "Requester Sign"
+   "label": "Requester Sign",
+   "reqd": 1
   },
   {
    "fieldname": "vendor_registration_no",
@@ -254,7 +259,8 @@
   {
    "fieldname": "vendor_signature",
    "fieldtype": "Signature",
-   "label": "Vendor Signature"
+   "label": "Vendor Signature",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_evey",
@@ -264,7 +270,7 @@
    "fieldname": "note",
    "fieldtype": "HTML",
    "label": "Note",
-   "options": "1.*Mandatory Field (Write N/A If Unregistered). <br>\n2. Kindly Attached Required Documents Eg. GST Certificate, Cancel Cheque, QMS Certificates, MSME Certificate."
+   "options": "1.*Mandatory Field (Write N/A If Unregistered). <br>\n2. Kindly Attached Required Documents Eg. GST Certificate, Cancel Cheque, Pan Card, QMS Certificates, MSME Certificate."
   },
   {
    "fieldname": "document_attachment",
@@ -276,12 +282,30 @@
   {
    "fieldname": "column_break_tkhv",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "scale",
+   "fieldtype": "Select",
+   "label": "Scale",
+   "options": "Micro\nSmall\nMedium"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Link",
+   "label": "State",
+   "options": "State"
+  },
+  {
+   "fetch_from": "state.gst_no",
+   "fieldname": "sate_gst_no",
+   "fieldtype": "Data",
+   "label": "Sate GST No"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-03 10:50:32.351542",
+ "modified": "2024-11-04 12:07:30.570113",
  "modified_by": "Administrator",
  "module": "Iso 9001 2015",
  "name": "Supplier Registration",
