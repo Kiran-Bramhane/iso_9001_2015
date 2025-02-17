@@ -12,7 +12,7 @@
   "office_address",
   "turnover_of_company",
   "state",
-  "sate_gst_no",
+  "state_gst_no",
   "column_break_fgwg",
   "supplier_type",
   "factory_address",
@@ -293,19 +293,19 @@
    "fieldname": "state",
    "fieldtype": "Link",
    "label": "State",
-   "options": "State"
+   "options": "Territory"
   },
   {
-   "fetch_from": "state.gst_no",
-   "fieldname": "sate_gst_no",
-   "fieldtype": "Data",
-   "label": "Sate GST No"
+   "fetch_from": "state.custom_state_gst_code",
+   "fieldname": "state_gst_no",
+   "fieldtype": "Int",
+   "label": "State GST No"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-04 12:07:30.570113",
+ "modified": "2025-02-01 11:22:08.941528",
  "modified_by": "Administrator",
  "module": "Iso 9001 2015",
  "name": "Supplier Registration",
