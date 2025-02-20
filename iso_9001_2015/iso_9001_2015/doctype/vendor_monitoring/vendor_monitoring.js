@@ -271,8 +271,8 @@ frappe.ui.form.on('Vendor Monitoring', {
                     }
                 });
 
-                let reject_percentage = total_accepted_qty > 0 ? ((total_reject / total_accepted_qty) * 100).toFixed(2) : "0.00";
-                let rework_percentage = total_accepted_qty > 0 ? ((total_rework / total_accepted_qty) * 100).toFixed(2) : "0.00";
+                let reject_percentage = total_accepted_qty > 0 ? (((total_reject / total_accepted_qty) * 100)-100).toFixed(2) : "0.00";
+                let rework_percentage = total_accepted_qty > 0 ? (((total_rework / total_accepted_qty) * 100)-100).toFixed(2) : "0.00";
                 let good_percentage = total_condition_count > 0 ? ((total_good / total_condition_count) * 100).toFixed(2) : "0.00";
 
                 // ✅ On-Time Delivery Calculation
