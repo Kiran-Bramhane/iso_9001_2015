@@ -8,13 +8,6 @@
 // // });
 
 
-
-
-
-
-
-
-
 // frappe.ui.form.on('Vendor Monitoring', {
 //     general_templates: function(frm) {
 //         if (frm.doc.general_templates) {
@@ -49,8 +42,9 @@
 //         if (!frm.doc.supplier_name) return;
 
 //         console.log("Fetching QA Inspection and Purchase Data for supplier:", frm.doc.supplier_name);
+
 //         frappe.call({
-//             method: "iso_9001_2015.iso_9001_2015.doctype.vendor_monitoring.vendor_monitoring.get_vendor_monitoring_data",
+//             method: "get_qa_records",
 //             args: {
 //                 supplier_name: frm.doc.supplier_name
 //             },
@@ -77,10 +71,11 @@
 //                     }
 //                 });
 
-//                 let reject_percentage = total_accepted_qty > 0 ? ((total_reject / total_accepted_qty) * 100).toFixed(2) : "0.00";
-//                 let rework_percentage = total_accepted_qty > 0 ? ((total_rework / total_accepted_qty) * 100).toFixed(2) : "0.00";
-//                 let good_percentage = total_condition_count > 0 ? ((total_good / total_condition_count) * 100).toFixed(2) : "0.00";
 
+//                 let reject_percentage = total_accepted_qty > 0 ? Math.abs((((total_reject / total_accepted_qty) * 100)-100).toFixed(2)) : "0.00";
+//                 let rework_percentage = total_accepted_qty > 0 ? Math.abs((((total_rework / total_accepted_qty) * 100)-100).toFixed(2)) : "0.00";
+//                 let good_percentage = total_condition_count > 0 ? ((total_good / total_condition_count) * 100).toFixed(2) : "0.00";
+                
 //                 // ✅ On-Time Delivery Calculation
 //                 let total_orders = data.purchase_orders.length;
 //                 let on_time_count = 0;
@@ -181,29 +176,12 @@
 //     });
 
 //     // Calculate the average rating out of 100
-//     let total_percentage = total_count > 0 ? (total_rating / total_count) : 0;
+//     let total_percentage = total_count > 0 ? Math.abs((total_rating / total_count)) : 0;
 
 //     // Ensure the total percentage is out of 100
 //     frm.set_value('total_percentage', total_percentage.toFixed(2));
 //     frm.refresh_field('total_percentage');
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
