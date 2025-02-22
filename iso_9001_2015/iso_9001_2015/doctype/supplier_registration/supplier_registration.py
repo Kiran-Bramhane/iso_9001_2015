@@ -130,3 +130,32 @@ class SupplierRegistration(Document):
         missing_documents = [doc for doc in required_documents if doc not in attached_documents]
         if missing_documents:
             frappe.throw(f"Please attach the required documents: {', '.join(missing_documents)}")
+
+
+
+
+
+
+
+
+# import frappe
+import requests
+
+@frappe.whitelist()
+def get_gst_details(gst_no):  # Use gst_no instead of doc.gst_no
+    url = f"https://gsp.adaequare.com/test/enriched/ewb/master/GetGSTINDetails?GSTIN={gst_no}"
+    
+    headers = {
+        'x-rapidapi-host': 'gst-return-status.p.rapidapi.com',
+        'x-rapidapi-key': '60cd4c7bcdmshdcf4ab58e1d3aa7p100239jsn88cb5c60cde3',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
+    }
+    
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  # Ensure successful response
+        return response.json()  # Send response data back
+    except requests.exceptions.RequestException as e:
+        frappe.throw(f"API Request Failed: {str(e)}")

@@ -126,3 +126,14 @@ def get_vendor_monitoring_data(supplier_name):
     except Exception as e:
         frappe.log_error(f"Error fetching data for supplier {supplier_name}: {str(e)}")
         frappe.throw("An error occurred while fetching supplier-related data.")
+
+
+
+
+
+
+
+
+
+
+
