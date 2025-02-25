@@ -9,7 +9,8 @@
   "section_break_4i2d",
   "amended_from",
   "company",
-  "office_address",
+  "office_address_1",
+  "office_address_2",
   "turnover_of_company",
   "state",
   "state_gst_no",
@@ -74,13 +75,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "office_address",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Office Address",
-   "reqd": 1
-  },
-  {
    "fieldname": "turnover_of_company",
    "fieldtype": "Int",
    "in_list_view": 1,
@@ -109,7 +103,7 @@
   },
   {
    "fieldname": "factory_address",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Factory Address",
    "reqd": 1
   },
@@ -291,21 +285,33 @@
   },
   {
    "fieldname": "state",
-   "fieldtype": "Link",
-   "label": "State",
-   "options": "Territory"
+   "fieldtype": "Data",
+   "label": "State"
   },
   {
-   "fetch_from": "state.custom_state_gst_code",
    "fieldname": "state_gst_no",
    "fieldtype": "Int",
    "label": "State GST No"
+  },
+  {
+   "fieldname": "office_address_1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Office Address Line 1",
+   "reqd": 1
+  },
+  {
+   "fieldname": "office_address_2",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Office Address Line 2",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-02-20 12:52:26.449142",
+ "modified": "2025-02-25 10:07:02.106549",
  "modified_by": "Administrator",
  "module": "Iso 9001 2015",
  "name": "Supplier Registration",
