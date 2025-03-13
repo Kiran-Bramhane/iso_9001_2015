@@ -66,7 +66,7 @@
 
 
 
-
+import re
 import frappe
 from frappe.model.document import Document
 
@@ -87,11 +87,13 @@ class SupplierRegistration(Document):
         if self.account_number:
             if not self.account_number.isdigit() or not (9 <= len(self.account_number) <= 18):
                 frappe.throw(f"Invalid Account Number: {self.account_number}. Example: '123456789' (must be 9 to 18 digits long)")
-
-        # Validate MSME Number (Assuming it should be alphanumeric with 12 characters)
         if self.msme_no:
-            if len(self.msme_no) != 12 or not self.msme_no.isalnum():
-                frappe.throw(f"Invalid MSME Number: {self.msme_no}. Example: 'UAN1234567890' (12-character alphanumeric code)")
+            # Regex pattern to validate MSME number (Udyam-<StateCode>-<12-Digits>)
+            msme_pattern = r"^UDYAM-[A-Z]{2}-\d{12}$"
+
+            # Check if MSME number matches the pattern
+            if not re.match(msme_pattern, self.msme_no):
+                frappe.throw(f"Invalid MSME Number: {self.msme_no}. Example: 'UDYAM-DL-123456789012'")
 
         # Validate IFSC Code (Format: 4 letters followed by 7 alphanumeric characters)
         if self.ifsc_code:

@@ -1,4 +1,4 @@
-frappe.pages["vendor-followup"].on_page_load = function(wrapper) {
+frappe.pages["vendor-followup"].on_page_load = function (wrapper) {
     var page = frappe.ui.make_app_page({
         parent: wrapper,
         title: "Vendor Follow-Up",
@@ -11,7 +11,10 @@ frappe.pages["vendor-followup"].on_page_load = function(wrapper) {
         let supplier = page.supplier_field.get_value();
         let from_date = page.from_date_field.get_value();
         let to_date = page.to_date_field.get_value();
-        get_data(supplier, from_date, to_date).then((supplierData) => {
+        let po_type = page.po_type_field.get_value();
+        let status = page.status_field.get_value();
+
+        get_data(supplier, from_date, to_date, po_type, status).then((supplierData) => {
             render_data(supplierData);
         }).catch((err) => {
             console.log("Error fetching data:", err);
@@ -22,35 +25,71 @@ frappe.pages["vendor-followup"].on_page_load = function(wrapper) {
     page.from_date_field = page.add_field({
         fieldname: 'from_date',
         label: __('From Date'),
-        fieldtype: 'Date',
-        change: function() {
-            load_data();
-        },
+        fieldtype: 'Date'
     });
 
     page.to_date_field = page.add_field({
         fieldname: 'to_date',
         label: __('To Date'),
-        fieldtype: 'Date',
-        change: function() {
-            load_data();
-        },
+        fieldtype: 'Date'
     });
 
     page.supplier_field = page.add_field({
         fieldname: 'supplier',
         label: __('Supplier'),
         fieldtype: 'Link',
-        options: 'Supplier',
-        change: function() {
-            load_data();
-        },
+        options: 'Supplier'
     });
 
-    function get_data(supplier, from_date, to_date) {
+    page.po_type_field = page.add_field({
+        fieldname: 'po_type',
+        label: __('PO Type'),
+        fieldtype: 'Select',
+        options: ["",'Capital', 'Consumable', 'Expense', 'Others', 'Return', 'Rework', 'Sub-Contract'].join('\n') // Change these options as needed
+    });
+
+    page.status_field = page.add_field({
+        fieldname: 'status',
+        label: __('Status'),
+        fieldtype: 'Select',
+        options: ["",'To Receive and Bill', 'To Receive'].join('\n')
+    });
+
+    // // Add Search button
+    // page.search_button = page.add_field({
+    //     fieldname: 'search',
+    //     label: __('Search'),
+    //     fieldtype: 'Button',
+    //     click: function () {
+    //         load_data();
+    //     }
+    // });
+
+
+
+    page.search_button = page.add_field({
+        fieldname: 'search',
+        label: __('Search'),
+        fieldtype: 'Button',
+        css: {
+            'background-color': '#4CAF50', // Green background
+            'color': '#FFFFFF', // White text
+            'border': 'none', // No border
+            'padding': '10px 20px', // Padding
+            'font-size': '16px', // Font size
+            'border-radius': '5px', // Rounded corners
+            'cursor': 'pointer' // Pointer cursor on hover
+        },
+        icon: 'fa-search', // FontAwesome search icon
+        btn_class: 'btn-primary', // Bootstrap primary button class (if applicable)
+        click: function () {
+            load_data();
+        }
+    });
+
+    function get_data(supplier, from_date, to_date, po_type, status) {
         let filters = {
-            docstatus: 1,
-            status: ["in", ["To Receive and Bill", "To Receive"]]
+            docstatus: 1
         };
 
         if (supplier) {
@@ -62,6 +101,16 @@ frappe.pages["vendor-followup"].on_page_load = function(wrapper) {
             filters["transaction_date"] = ["<=", to_date];
         } else if (from_date) {
             filters["transaction_date"] = [">=", from_date];
+        }
+
+        if (po_type) {
+            filters["po_type"] = po_type;
+        }
+
+        if (status) {
+            filters["status"] = status;
+        } else {
+            filters["status"] = ["in", ["To Receive and Bill", "To Receive"]];
         }
 
         return frappe.call({
@@ -85,7 +134,7 @@ frappe.pages["vendor-followup"].on_page_load = function(wrapper) {
         });
         container.html(html);
 
-        container.find('.msgprint-btn').click(function() {
+        container.find('.msgprint-btn').click(function () {
             var button = $(this);
             var supplier = button.data('supplier');
             var email = button.data('email');
@@ -120,7 +169,7 @@ frappe.pages["vendor-followup"].on_page_load = function(wrapper) {
                         frappe.msgprint('Supplier email is required');
                         return;
                     }
-            
+
                     frappe.call({
                         method: 'iso_9001_2015.iso_9001_2015.page.vendor_followup.vendor_followup.send_supplier_email',
                         args: {
@@ -128,7 +177,7 @@ frappe.pages["vendor-followup"].on_page_load = function(wrapper) {
                             subject: 'Follow Up',
                             message: values.email
                         },
-                        callback: function(r) {
+                        callback: function (r) {
                             if (r.message.status === 'success') {
                                 frappe.msgprint('Email sent successfully');
                             } else {
@@ -141,14 +190,11 @@ frappe.pages["vendor-followup"].on_page_load = function(wrapper) {
             });
             d.show();
         });
-
     }
-    load_data();
+   // Initial Data Load - Load all data only if no filters are applied
+   setTimeout(() => {
+        if (!is_filtered) {
+            load_data();
+        }
+    }, 500); // Small delay to ensure filters are not set yet
 };
-
-
-
-
-
-
-

@@ -22,7 +22,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2025-02-25 10:26:13.212856",
+ "modified": "2025-03-11 10:44:35.833929",
  "modified_by": "midhat@preciholesports.com",
  "module": "Iso 9001 2015",
  "name": "supplier-registration",
@@ -154,6 +154,7 @@
   },
   {
    "allow_read_on_all_link_options": 0,
+   "description": "Individual: operating under your personal name, without forming a separate corporate or legal entity.",
    "fieldname": "supplier_type",
    "fieldtype": "Select",
    "hidden": 0,
@@ -194,6 +195,7 @@
   },
   {
    "allow_read_on_all_link_options": 0,
+   "description": "Please give me the format, like : 635-2024",
    "fieldname": "company_incorporation_year_and_reg_no",
    "fieldtype": "Data",
    "hidden": 0,

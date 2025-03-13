@@ -261,14 +261,15 @@ frappe.ui.form.on('Vendor Monitoring', {
                     data.purchase_orders.forEach(po => {
                         let pr = data.purchase_receipts.find(pr => pr.purchase_order === po.name);
 
-                        if (pr && pr.posting_date) {
-                            let scheduleDate = frappe.datetime.get_date(po.schedule_date);
-                            let postingDate = frappe.datetime.get_date(pr.posting_date);
+                        if (po.schedule_date && pr.posting_date) {
+                            let scheduleDate = frappe.datetime.str_to_obj(po.schedule_date);
+                            let postingDate = frappe.datetime.str_to_obj(pr.posting_date);
 
                             if (postingDate <= scheduleDate) {
                                 on_time_count++;
                             }
                         }
+                        
                     });
                 }
 
@@ -277,10 +278,10 @@ frappe.ui.form.on('Vendor Monitoring', {
                 console.log("✅ On-Time Delivery Percentage:", on_time_percentage);
 
                 let criteria_map = {
-                    "Rework": parseFloat(rework_percentage),
-                    "Reject": parseFloat(reject_percentage),
-                    "Condition Of Goods On Arrival": parseFloat(good_percentage),
-                    "Delivers On Time": parseFloat(on_time_percentage)
+                    "Rework": Math.abs(parseFloat(rework_percentage)),
+                    "Reject": Math.abs(parseFloat(reject_percentage)),
+                    "Condition Of Goods On Arrival": Math.abs(parseFloat(good_percentage)),
+                    "Delivers On Time": Math.abs(parseFloat(on_time_percentage))
                 };
 
                 console.log("Criteria Map:", criteria_map);

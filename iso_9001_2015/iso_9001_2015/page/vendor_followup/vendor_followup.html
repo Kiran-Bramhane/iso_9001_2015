@@ -1,163 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            background-color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-
-        .vendor_followup {
-            width: 100%;
-            padding: 10px;
-            position: relative;
-        }
-
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 10px;
-            padding: 10px;
-        }
-
-        .card {
-            border-radius: 5px;
-            padding: 15px;
-            background-color: #fff;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .card-header .supplier-name {
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .card-header .serial-no {
-            font-size: 14px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        .card-subheader {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            margin: 5px 0;
-            font-size: 12px;
-        }
-
-        .btn {
-            padding: 5px 10px;
-            font-size: 12px;
-            background-color: #0673e7;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            display: block;
-            width: 100%;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            background-color: #0f4bee;
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            .btn {
-                font-size: 10px;
-            }
-
-            .card p {
-                font-size: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .vendor_followup {
-                padding: 5px;
-            }
-
-            .card p {
-                font-size: 8px;
-            }
-
-            .btn {
-                font-size: 8px;
-                padding: 3px 5px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="vendor_followup">
-        <div class="card-container">
-            {% for purchase_order in purchase_orders %}
-            <div class="card">
-                <div class="card-header">
-                    <span class="supplier-name">{{ purchase_order.supplier }}</span>
-                    <span class="serial-no">S.No: {{ purchase_order.index }}</span>
-                </div>
-                <div class="card-subheader">
-                    <span>PO No: {{ purchase_order.name }}</span>
-                    <span>Date: {{ purchase_order.formatted_transaction_date }}</span>
-                </div>
-                <p><strong>Item Code:</strong> {{ purchase_order.item_code }}</p>
-                <p><strong>UOM:</strong> {{ purchase_order.uom }}</p>
-                <p><strong>Item Name:</strong> {{ purchase_order.item_name }}</p>
-                <p><strong>FG Item:</strong> {{ purchase_order.fg_item }}</p>
-                <p><strong>PO Qty:</strong> {{ purchase_order.qty }}</p>
-                <p><strong>Received Qty:</strong> {{ purchase_order.total_received_qty }}</p>
-                <p><strong>Accepted Qty:</strong> {{ purchase_order.total_accepted_qty }}</p>
-                <p><strong>Rework Qty:</strong> {{ purchase_order.total_rework }}</p>
-                <p><strong>Reject Qty:</strong> {{ purchase_order.total_reject }}</p>
-                <p><strong>Pending Qty:</strong> {{ purchase_order.pending_qty }}</p>
-                <p><strong>RM Received Qty:</strong> {{ purchase_order.rm_received_qty }}</p>
-                <p><strong>RM Balance Qty:</strong> {{ purchase_order.rm_balance_qty }}</p>
-                <p><strong>Lead Time Days:</strong> {{ purchase_order.lead_time_days }}</p>
-                <p><strong>Days From PO:</strong> {{ purchase_order.number_of_days_from_po }}</p>
-                <button class="btn msgprint-btn" data-supplier="{{ purchase_order.supplier }}" data-email="{{ purchase_order.contact_email }}">Follow Up</button>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</body>
-</html> -->
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -318,8 +158,14 @@
                     <p><strong>Rework Qty:</strong> {{ purchase_order.total_rework }}</p>
                     <p><strong>Reject Qty:</strong> {{ purchase_order.total_reject }}</p>
                     <p><strong>Pending Qty:</strong> {{ purchase_order.pending_qty }}</p>
-                    <p><strong>RM Received Qty:</strong> {{ purchase_order.rm_received_qty }}</p>
-                    <p><strong>RM Balance Qty:</strong> {{ purchase_order.rm_balance_qty }}</p>
+                    <!-- <p><strong>RM Received Qty:</strong> {{ purchase_order.rm_received_qty }}</p>
+                    <p><strong>RM Balance Qty:</strong> {{ purchase_order.rm_balance_qty }}</p> -->
+
+                    {% if purchase_order.po_type == "Sub-Contract" %}
+                        <p><strong>RM Received Qty:</strong> {{ purchase_order.rm_received_qty }}</p>
+                        <p><strong>RM Balance Qty:</strong> {{ purchase_order.rm_balance_qty }}</p>
+                    {% endif %}
+
                     <p><strong>Lead Time Days:</strong> {{ purchase_order.lead_time_days }}</p>
                     <p><strong>Days From PO:</strong> {{ purchase_order.number_of_days_from_po }}</p>
                 </div>
