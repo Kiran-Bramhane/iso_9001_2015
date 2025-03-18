@@ -55,7 +55,7 @@ frappe.pages["vendor-followup"].on_page_load = function (wrapper) {
         options: ["",'To Receive and Bill', 'To Receive'].join('\n')
     });
 
-    // // Add Search button
+    // // // Add Search button
     // page.search_button = page.add_field({
     //     fieldname: 'search',
     //     label: __('Search'),
@@ -65,27 +65,56 @@ frappe.pages["vendor-followup"].on_page_load = function (wrapper) {
     //     }
     // });
 
+    // // Add a Bootstrap class to the button
+    // page.search_button.$wrapper.addClass('btn btn-light');
 
 
+
+
+    // Add Search button with Bootstrap class from the start
     page.search_button = page.add_field({
         fieldname: 'search',
         label: __('Search'),
         fieldtype: 'Button',
-        css: {
-            'background-color': '#4CAF50', // Green background
-            'color': '#FFFFFF', // White text
-            'border': 'none', // No border
-            'padding': '10px 20px', // Padding
-            'font-size': '16px', // Font size
-            'border-radius': '5px', // Rounded corners
-            'cursor': 'pointer' // Pointer cursor on hover
-        },
-        icon: 'fa-search', // FontAwesome search icon
-        btn_class: 'btn-primary', // Bootstrap primary button class (if applicable)
         click: function () {
-            load_data();
-        }
+                load_data();
+            }
     });
+
+    // Apply Bootstrap and custom class immediately
+    page.search_button.$wrapper.addClass('btn custom-search-btn');
+
+    // Add custom styles at creation
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .custom-search-btn button {
+            background-color: #007bff; /* Blue background */
+            color: white; /* White text */
+            border: 1px solid #0056b3;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(0, 123, 255, 0.3);
+        }
+
+        .custom-search-btn button:hover {
+            background-color: #0056b3;
+            color: white;
+            box-shadow: 0px 6px 10px rgba(0, 91, 187, 0.5);
+        }
+
+        .custom-search-btn button:active {
+            background-color: #004494;
+            color: white;
+            transform: scale(0.95);
+            box-shadow: 0px 2px 6px rgba(0, 68, 148, 0.5);
+        }
+    `;
+    document.head.appendChild(style);
+
+
+
 
     function get_data(supplier, from_date, to_date, po_type, status) {
         let filters = {
